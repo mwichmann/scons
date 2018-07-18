@@ -106,6 +106,9 @@ RELEASE  VERSION/DATE TO BE FILLED IN LATER
       and EnvironmentTests (asserts comparing with self).
       For consistency, env.Tool() now returns a tool object the same way
       Tool() has done.
+    - Add support for indicating warnings to be treated as errors,
+      both via a new --werror= flag (syntax like --warn), and via
+      SetOption('werror').
 
   From Dillan Mills:
     - Add support for the (TARGET,SOURCE,TARGETS,SOURCES,CHANGED_TARGETS,CHANGED_SOURCES}.relpath property.
