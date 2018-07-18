@@ -24,6 +24,14 @@
 """SCons exception classes.
 
 Used to handle internal and user errors in SCons.
+
+The basic model is that if an error needs to be raised,
+it should use one of the classes here. In main(), the entire
+execution of the engine is wrapped in a try block, which
+catches BuildError, UserError, InternalError as well as
+Python's SyntaxError (and a couple of other cases), and produces
+the wanted output and traceback before quitting.
+
 """
 
 import shutil

@@ -148,6 +148,7 @@ class SConsValues(optparse.Values):
         'silent',
         'stack_size',
         'warn',
+        'werror',
 
         # TODO: Remove these once we update the AddOption() API to allow setting
         #       added flag as settable.
@@ -225,7 +226,7 @@ class SConsValues(optparse.Values):
             if SCons.Util.is_String(value):
                 value = [value]
             value = self.__SConscript_settings__.get(name, []) + value
-            SCons.Warnings.process_warn_strings(value)
+            SCons.Warnings.process_warn_strings(value, flavor="warn")
         elif name == 'no_progress':
             SCons.Script.Main.progress_display.set_mode(False)
         elif name == 'experimental':
@@ -235,6 +236,11 @@ class SConsValues(optparse.Values):
         elif name in ('implicit_deps_changed', 'implicit_deps_unchanged'):
             if value:
                 self.__SConscript_settings__['implicit_cache'] = True
+        elif name == 'werror':
+            if SCons.Util.is_String(value):
+                value = [value]
+            value = self.__SConscript_settings__.get(name, []) + value
+            SCons.Warnings.process_warn_strings(value, flavor="error")
 
         self.__SConscript_settings__[name] = value
 
@@ -1071,6 +1077,18 @@ def Parser(version):
                   dest="warn", default=[],
                   action="callback", callback=opt_warn,
                   help="Enable or disable warnings",
+                  metavar="WARNING-SPEC")
+
+    def opt_werror(option, opt, value, parser, tree_options=tree_options):
+        if SCons.Util.is_String(value):
+            value = value.split(',')
+        parser.values.werror.extend(value)
+
+    op.add_option('--werror', '--werr',
+                  nargs=1, type="string",
+                  dest="werror", default=[],
+                  action="callback", callback=opt_werror,
+                  help="Enable or disable exceptions on warnings.",
                   metavar="WARNING-SPEC")
 
     op.add_option('-Y', '--repository', '--srcdir',

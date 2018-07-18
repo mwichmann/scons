@@ -52,7 +52,7 @@ try:
     if 'PATH' in ENV:
         ENV_PATH = PATH + os.pathsep + ENV['PATH']
     else:
-        Exit(0) # this is certainly a weird system :-)
+        Exit(1) # this is certainly a weird system :-)
 except KeyError:
     ENV_PATH=ENV.get('PATH', '')
 

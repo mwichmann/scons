@@ -2140,7 +2140,7 @@ after other processing.</para>
     <option>--warn=no-<replaceable>type</replaceable></option>
   </term>
   <listitem>
-<para>Enable or disable (with the prefix "no-") warnings
+<para>Enable or disable (with the <literal>no-</literal> prefix) warnings
 (<option>--warning</option> is a synonym).
 <replaceable>type</replaceable>
 specifies the type of warnings to be enabled or disabled:</para>
@@ -2354,6 +2354,21 @@ These warnings are enabled by default.</para>
   </listitem>
   </varlistentry>
   </variablelist> <!-- end nested list -->
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term>
+    <option>--werror=<replaceable>type</replaceable></option>,
+    <option>--werror=no-<replaceable>type</replaceable></option>
+  </term>
+  <listitem>
+<para>Enable or disable (with the <literal>no-</literal> prefix)
+treatement of warnings as errors.
+<replaceable>type</replaceable>
+specifies the type of warnings to be enabled or disabled -
+see the <option>--warn</option> option for the list.
+</para>
   </listitem>
   </varlistentry>
 
