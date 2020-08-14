@@ -63,7 +63,7 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.SConsWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 1
 
@@ -72,7 +72,7 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.SConsWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 0
 
@@ -127,7 +127,7 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.SConsWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 0
 
@@ -136,7 +136,7 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.SConsWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 1
 
@@ -145,7 +145,7 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.DependencyWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 0
 
@@ -165,7 +165,7 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.SConsWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 0
         assert to.out == "Foo", to.out
@@ -175,7 +175,7 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.SConsWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 1
 
@@ -185,7 +185,7 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.DependencyWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 0
         assert to.out == "Foo", to.out
@@ -199,10 +199,10 @@ class WarningsTestCase(unittest.TestCase):
         exc_caught = 0
         try:
             SCons.Warnings.warn(SCons.Warnings.DependencyWarning, "Foo")
-        except:
+        except SCons.Warnings.SConsWarning:
             exc_caught = 1
         assert exc_caught == 0
-        assert to.out == None, to.out
+        assert to.out is None, to.out
 
 
 if __name__ == "__main__":
