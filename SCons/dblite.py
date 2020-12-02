@@ -49,7 +49,7 @@ DBLITE_SUFFIX = '.dblite'
 TMP_SUFFIX = '.tmp'
 
 
-class dblite:
+class Dblite:
     """
     Squirrel away references to the functions in various modules
     that we'll use when our __del__() method calls our sync() method
@@ -111,16 +111,22 @@ class dblite:
             self._chgrp_to = -1  # don't chgrp
 
         if self._flag == "n":
+            # make sure it exists and is empty, no data to get
             with self._open(self._file_name, "wb", self._mode):
-                pass  # just make sure it exists
+                pass
         else:
+            # read in the data and process, closing the file.
+            # any updates are handled on close, db is mainained
+            # only in memory until then.
             try:
                 f = self._open(self._file_name, "rb")
             except IOError as e:
+                # an error for file not to exist, unless flag is create
                 if self._flag != "c":
                     raise e
+                # create it, no data to get
                 with self._open(self._file_name, "wb", self._mode):
-                    pass  # just make sure it exists
+                    pass
             else:
                 p = f.read()
                 f.close()
@@ -195,20 +201,27 @@ class dblite:
         self._needs_sync = True
 
     def keys(self):
-        return list(self._dict.keys())
+        yield from self._dict
 
-    def __contains__(self, key):
+    def items(self):
+        for key in self._dict:
+            yield (key, self._dict[key])
+
+    def values(self):
+        for key in self._dict:
+            yield self._dict[key]
+
+    def __contains__(self, key) -> bool:
         return key in self._dict
 
-    def __iter__(self):
-        return iter(self._dict)
+    __iter__ = keys
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._dict)
 
 
 def open(file, flag=None, mode=0o666):
-    return dblite(file, flag, mode)
+    return Dblite(file, flag, mode)
 
 
 def _exercise():
@@ -259,10 +272,10 @@ def _exercise():
 
     db = open("tmp", "n")
     assert len(db) == 0, len(db)
-    dblite._open("tmp.dblite", "w")
+    Dblite._open("tmp.dblite", "w")
 
     db = open("tmp", "r")
-    dblite._open("tmp.dblite", "w").write("x")
+    Dblite._open("tmp.dblite", "w").write("x")
     try:
         db = open("tmp", "r")
     except pickle.UnpicklingError:
