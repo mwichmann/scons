@@ -1,11 +1,15 @@
 SCons - a software construction tool
 ####################################
 
-.. image:: https://img.shields.io/pypi/v/scons
-   :alt: PyPI
+.. image:: https://img.shields.io/pypi/status/scons   :alt: PyPI - Status
 
-.. image:: https://img.shields.io/pypi/dd/scons
-   :alt: PyPI - Downloads
+.. image:: https://img.shields.io/pypi/v/scons :alt: PyPI
+
+.. image:: https://img.shields.io/pypi/dd/scons :alt: PyPI - Downloads
+
+.. image:: https://img.shields.io/conda/v/conda-forge/scons   :alt: Conda
+
+.. image:: https://img.shields.io/conda/dn/conda-forge/scons   :alt: Conda - Downloads
 
 .. image:: https://img.shields.io/badge/IRC-scons-blue.svg
    :target: http://webchat.freenode.net/?channels=%23scons&uio=d4
@@ -14,17 +18,8 @@ SCons - a software construction tool
 .. image:: https://img.shields.io/discord/571796279483564041
    :alt: Discord
 
-.. image:: https://travis-ci.org/SCons/scons.svg?branch=master
-   :target: https://travis-ci.org/SCons/scons
-   :alt: Travis CI build status
+.. image:: https://img.shields.io/github/issues/SCons/scons   :alt: GitHub issues
 
-.. image:: https://ci.appveyor.com/api/projects/status/github/SCons/scons?svg=true&branch=master
-   :target: https://ci.appveyor.com/project/SCons/scons
-   :alt: AppVeyor CI build Status
-
-.. image:: https://codecov.io/gh/SCons/scons/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/SCons/scons
-   :alt: CodeCov Coverage Status
 
 About SCons
 -----------
