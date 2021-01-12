@@ -1,0 +1,4 @@
+This fixes problems with /usr/bin/env python: some 
+file headers, which is fine; and some pasting instead
+of hardcoding inside test stanzas, which should be
+unified across the test suite base.
