@@ -1,6 +1,9 @@
 SCons - a software construction tool
 ####################################
 
+.. image:: https://badge.fury.io/py/scons.svg
+    :target: https://badge.fury.io/py/scons
+
 .. image:: https://img.shields.io/badge/IRC-scons-blue.svg
    :target: http://webchat.freenode.net/?channels=%23scons&uio=d4
    :alt: IRC
