@@ -1,15 +1,20 @@
 SCons - a software construction tool
 ####################################
 
-.. image:: https://img.shields.io/pypi/status/scons   :alt: PyPI - Status
+.. image:: https://img.shields.io/pypi/status/scons
+   :alt: PyPI - Status
 
-.. image:: https://img.shields.io/pypi/v/scons :alt: PyPI
+.. image:: https://img.shields.io/pypi/v/scons
+   :alt: PyPI
 
-.. image:: https://img.shields.io/pypi/dd/scons :alt: PyPI - Downloads
+.. image:: https://img.shields.io/pypi/dd/scons
+   :alt: PyPI - Downloads
 
-.. image:: https://img.shields.io/conda/v/conda-forge/scons   :alt: Conda
+.. image:: https://img.shields.io/conda/v/conda-forge/scons
+   :alt: Conda
 
-.. image:: https://img.shields.io/conda/dn/conda-forge/scons   :alt: Conda - Downloads
+.. image:: https://img.shields.io/conda/dn/conda-forge/scons
+   :alt: Conda - Downloads
 
 .. image:: https://img.shields.io/badge/IRC-scons-blue.svg
    :target: http://webchat.freenode.net/?channels=%23scons&uio=d4
@@ -18,7 +23,8 @@ SCons - a software construction tool
 .. image:: https://img.shields.io/discord/571796279483564041
    :alt: Discord
 
-.. image:: https://img.shields.io/github/issues/SCons/scons   :alt: GitHub issues
+.. image:: https://img.shields.io/github/issues/SCons/scons
+   :alt: GitHub issues
 
 
 About SCons
