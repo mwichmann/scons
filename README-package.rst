@@ -1,6 +1,14 @@
 SCons - a software construction tool
 ####################################
 
+.. image:: https://pypip.in/v/$REPO/badge.png
+    :target: https://crate.io/packages/$REPO/
+    :alt: Latest PyPI version
+
+.. image:: https://pypip.in/d/$REPO/badge.png
+    :target: https://crate.io/packages/$REPO/
+    :alt: Number of PyPI downloads
+
 .. image:: https://img.shields.io/pypi/status/scons
    :alt: PyPI - Status
    :width: 12%
