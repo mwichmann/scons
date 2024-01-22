@@ -8,7 +8,7 @@ import sys
 print(sys.argv)
 comment = ('#' + sys.argv[1]).encode()
 
-opts, args = getopt.getopt(sys.argv[2:], 'cf:o:K:')
+opts, args = getopt.getopt(sys.argv[2:], 'cf:J:o:K:')
 for opt, arg in opts:
     if opt == '-o':
         out = arg

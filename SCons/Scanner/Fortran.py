@@ -31,6 +31,7 @@ import SCons.Warnings
 from SCons.Util import unique
 from . import Classic, Current, FindPathDirs
 
+
 class F90Scanner(Classic):
     """A Classic Scanner subclass for Fortran source files.
 
@@ -139,9 +140,14 @@ class F90Scanner(Classic):
             path = path()
         for include in includes:
             _add_dep(include, source_dir, tuple(path))
+
         # Have to mimic compiler behavior of also looking in module dir.
-        mod_dir = env.subst('$FORTRANMODDIR') if modules else ""
-        mod_path = (env.fs.Dir(mod_dir),) if mod_dir else ()
+        if env.get('FORTRANMODDIR') and env.subst('$FORTRANMODDIR'):
+            # Add this path to the list of paths searched for used modules
+            mod_path = (env.Dir('$FORTRANMODDIR'),)
+        else:
+            mod_path = ()
+
         for module in modules:
             _add_dep(module, source_dir, path + mod_path)
 

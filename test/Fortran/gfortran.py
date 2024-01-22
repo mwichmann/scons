@@ -35,10 +35,19 @@ test = TestSCons.TestSCons()
 
 _exe = TestSCons._exe
 
-gfortran = test.detect_tool('gfortran')
+from SCons.Tool.gfortran import compilers
 
-if not gfortran:
-    test.skip_test("Could not find gfortran tool, skipping test.\n")
+# Handle multiple possible gfortran binary names
+found = False
+for c in compilers:
+    if test.where_is(c):
+        found = True
+        break
+
+if not found:
+    compiler_list = " or ".join(compilers)
+    test.skip_test(f"Could not find {compiler_list}, skipping test.\n")
+
 
 test.write('SConstruct', """
 env = Environment(tools=['gfortran','link'])
@@ -61,7 +70,7 @@ program main
 end program main
 """)
 
-test.run(arguments = '.')
+test.run(arguments='.')
 
 test.must_exist('test1' + _exe)
 test.must_exist('test1mod.mod')

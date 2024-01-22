@@ -77,10 +77,12 @@ def _fortranEmitter(target, source, env) -> Tuple:
     modules = SCons.Util.unique(modules)
     # Convert module name to a .mod filename
     suffix = env.subst('$FORTRANMODSUFFIX', target=target, source=source)
-    moddir = env.subst('$FORTRANMODDIR', target=target, source=source)
     modules = [mod.lower() + suffix for mod in modules]
+
+    # If FORTRANMODDIR is not a Dir(), then create one based at the top of tree.
+    mod_dir_path = env.fs.Dir(env.subst('$FORTRANMODDIR', target=target, source=source, conv=lambda x: x), directory=env.Dir('#'))
     for module in modules:
-        target.append(env.fs.File(module, moddir))
+        target.append(env.fs.File(module, mod_dir_path))
     return target, source
 
 
@@ -192,6 +194,16 @@ def DialectAddToEnv(
         env[f'SH{dialect}PPCOM'] = f'$SH{dialect} -o $TARGET -c $FORTRANCOMMONFLAGS $SH{dialect}FLAGS $CPPFLAGS $_CPPDEFFLAGS $_{dialect}INCFLAGS $SOURCES'
 
 
+
+def _fortran_mod_flag(target, source, env, for_signature):
+    # check if FORTRANMODDIR evaluates to any non empty value
+    mod_dir_value = env.subst('$FORTRANMODDIR', target=target, source=source)
+
+    if mod_dir_value:
+        # If it does, then create a Dir node, if not already one, always relative to the base dir
+        mod_dir = env.fs.Dir(mod_dir_value, directory=env.Dir('#'))
+        return '${FORTRANMODDIRPREFIX}%s${FORTRANMODDIRSUFFIX}'%mod_dir
+
 def add_fortran_to_env(env) -> None:
     """Add Builders and construction variables for Fortran/generic."""
     FortranSuffixes = env.get('FORTRANFILESUFFIXES', ['.f', '.for', '.ftn'])
@@ -204,7 +216,7 @@ def add_fortran_to_env(env) -> None:
     env['FORTRANMODDIR'] = ''          # where the compiler should place .mod files
     env['FORTRANMODDIRPREFIX'] = ''    # some prefix to $FORTRANMODDIR - similar to $INCPREFIX
     env['FORTRANMODDIRSUFFIX'] = ''    # some suffix to $FORTRANMODDIR - similar to $INCSUFFIX
-    env['_FORTRANMODFLAG'] = '$( ${_concat(FORTRANMODDIRPREFIX, FORTRANMODDIR, FORTRANMODDIRSUFFIX, __env__, RDirs, TARGET, SOURCE)} $)'
+    env['_FORTRANMODFLAG'] = _fortran_mod_flag
 
 def add_f77_to_env(env) -> None:
     """Add Builders and construction variables for f77 dialect."""

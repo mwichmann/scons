@@ -7,7 +7,7 @@ import sys
 
 comment = ('#' + sys.argv[1]).encode()
 
-opts, args = getopt.getopt(sys.argv[2:], 'cf:o:xyz')
+opts, args = getopt.getopt(sys.argv[2:], 'cf:J:o:xyz')
 optstring = ''
 length = len(comment)
 for opt, arg in opts:

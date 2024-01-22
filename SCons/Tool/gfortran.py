@@ -32,7 +32,7 @@ selection method.
 from SCons.Util import CLVar
 from SCons.Tool.FortranCommon import add_all_to_env, add_fortran_to_env
 
-compilers = ['gfortran']
+compilers = ['gfortran', 'gfortran-mp-13']
 
 
 def generate(env) -> None:
