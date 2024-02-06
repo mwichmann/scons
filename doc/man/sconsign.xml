@@ -68,14 +68,14 @@ depfile: content-signature timestamp length
 is the hash of the file's contents (<firstterm>csig</firstterm>)
 and <emphasis role="bold">build-signature</emphasis>
 is the hash of the command line or other build action
-used to build a target (<firstterm>bactsig</firstterm>).
+used to build a target (<firstterm>bsig</firstterm>).
 If provided,
 <emphasis role="bold">action-string</emphasis>
 is the unexpanded string action or the function called.
 <emphasis role="bold">None</emphasis>
 is printed in place of any missing timestamp,
 <emphasis role="bold">csig</emphasis>,
-or <emphasis role="bold">bactsig</emphasis>
+or <emphasis role="bold">bsig</emphasis>
 values for any entry or any of its dependencies.
 If the entry has no implicit dependencies,
 or no build action,
