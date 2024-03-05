@@ -619,6 +619,10 @@ class SubstitutionEnvironment:
         """Emulates the setdefault() method of dictionaries."""
         return self._dict.setdefault(key, default)
 
+    def update(self, other):
+        """Emulates the update() method of dictionaries."""
+        return self._dict.update(other)
+
     def arg2nodes(self, args, node_factory=_null, lookup_list=_null, **kw):
         """Converts *args* to a list of nodes.
 
@@ -2636,6 +2640,10 @@ class OverrideEnvironment(Base):
         except KeyError:
             self.__dict__['overrides'][key] = default
             return default
+
+    def update(self, other):
+        """Emulates the update() method of dictionaries."""
+        return self.__dict__['overrides'].update(other)
 
     # Overridden private construction environment methods.
     def _update(self, other) -> None:

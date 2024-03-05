@@ -3747,9 +3747,11 @@ class OverrideEnvironmentTestCase(unittest.TestCase,TestEnvironmentFixture):
     def setUp(self) -> None:
         env = Environment()
         env._dict = {'XXX' : 'x', 'YYY' : 'y'}
+
         def verify_value(env, key, value, *args, **kwargs) -> None:
             """Verifies that key is value on the env this is called with."""
             assert env[key] == value
+
         env.AddMethod(verify_value)
         env2 = OverrideEnvironment(env, {'XXX' : 'x2'})
         env3 = OverrideEnvironment(env2, {'XXX' : 'x3', 'YYY' : 'y3', 'ZZZ' : 'z3'})
@@ -3906,13 +3908,23 @@ class OverrideEnvironmentTestCase(unittest.TestCase,TestEnvironmentFixture):
         assert env3['YYY'] == 'y3', env3['YYY']
 
         env.Replace(YYY = 'y4')
-
         assert env['XXX'] == 'x', env['XXX']
         assert env2['XXX'] == 'x2', env2['XXX']
         assert env3['XXX'] == 'x3', env3['XXX']
         assert env['YYY'] == 'y4', env['YYY']
         assert env2['YYY'] == 'y4', env2['YYY']
         assert env3['YYY'] == 'y3', env3['YYY']
+
+    def test_update(self) -> None:
+        """Test that the update method only updates the override."""
+        env, env2, _ = self.envs
+        env2.update({'XXX' : 'x3', 'YYY' : 'y3', 'ZZZ' : 'z3'})
+        self.assertEqual(env['XXX'], 'x')
+        self.assertEqual(env['YYY'], 'y')
+        self.assertNotIn('ZZZ', env)
+        self.assertEqual(env2['XXX'], 'x3')
+        self.assertEqual(env2['YYY'], 'y3')
+        self.assertEqual(env2['ZZZ'], 'z3')
 
     # Tests a number of Base methods through an OverrideEnvironment to
     # make sure they handle overridden constructionv variables properly.
