@@ -16,6 +16,12 @@ RELEASE  VERSION/DATE TO BE FILLED IN LATER
     - ty: Initial support setup within `pyproject.toml`.
     - Removed Python 3.7 & 3.8 support.
 
+  From William Deegan:
+    - Fix documentation processing to work with lxml 6.1.3 and newer, which no
+      longer resolves external parameter entities by default (lxml LP#2165901).
+      This affects both the SCons documentation build and the docbook tool,
+      which failed on any DocBook source pulling in an external entity module.
+
   From Mats Wichmann:
     - Reference manual improvements:
       * Additional clarification for SideEffect()
