@@ -16,6 +16,19 @@ RELEASE  VERSION/DATE TO BE FILLED IN LATER
     - ty: Initial support setup within `pyproject.toml`.
     - Removed Python 3.7 & 3.8 support.
 
+  From William Deegan:
+    - Fix documentation processing to work with lxml 6.1.3 and newer, which no
+      longer resolves external parameter entities by default (lxml LP#2165901).
+      This affects both the SCons documentation build and the docbook tool,
+      which failed on any DocBook source pulling in an external entity module.
+    - Fix the DocBook slides tests on distributions whose docbook-xsl VERSION
+      file carries a non-numeric <fm:Version> - Debian and Ubuntu ship
+      "snapshot" there for 1.79.2. detectXsltVersion() reported (0, 0, 0), so
+      the tests fed the plain, non-namespaced input to namespace-aware
+      stylesheets and silently produced an empty document. The helper now
+      falls back to the <fm:Branch> field, which names the XSL-NS branch
+      outright.
+
   From Mats Wichmann:
     - Reference manual improvements:
       * Additional clarification for SideEffect()
