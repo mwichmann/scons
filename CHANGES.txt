@@ -30,6 +30,7 @@ RELEASE  VERSION/DATE TO BE FILLED IN LATER
       outright.
 
   From Mats Wichmann:
+    - Fix the ninja ctrl-c test, which was failing on some platforms.
     - Reference manual improvements:
       * Additional clarification for SideEffect()
 

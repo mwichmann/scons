@@ -49,6 +49,8 @@ FIXES
   the SCons documentation build and the docbook tool, which failed on any
   DocBook source pulling in an external entity module.
 
+- Fix the ninja ctrl-c test, which was failing on some platforms.
+
 IMPROVEMENTS
 ------------
 
